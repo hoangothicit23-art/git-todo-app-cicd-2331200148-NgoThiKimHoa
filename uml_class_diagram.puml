@@ -1,0 +1,40 @@
+@startuml
+' --- ĐỊNH NGHĨA CÁC CLASS ---
+
+class TodoService {
+    todos
+    observers
+    addObserver(observer)
+    notify()
+    addTodo(text)
+    toggleTodoComplete(id)
+    removeTodo(id)
+    getTodos()
+}
+
+class View {
+    input
+    addButton
+    todoList
+    update(todos)
+    bindAddTodo(handler)
+    bindToggleTodo(handler)
+    bindRemoveTodo(handler)
+}
+
+class Controller {
+    service
+    view
+    initialize()
+    handleAddTodo(text)
+    handleToggleTodo(id)
+    handleRemoveTodo(id)
+}
+
+' --- ĐỊNH NGHĨA MỐI QUAN HỆ ---
+
+Controller --> TodoService : service
+Controller --> View : view
+TodoService --> View : observers (notify)
+
+@enduml
